@@ -16,7 +16,7 @@ ouster/os_driver:
     # lidar_mode[optional]: resolution and rate; possible values: { 512x10,
     # 512x20, 1024x10, 1024x20, 2048x10, 4096x5 }. Leave empty to remain on
     # current the lidar mode.
-    lidar_mode: ''
+    lidar_mode: '1024x20'
     # timestamp_mode[optional]: method used to timestamp measurements; possible
     # values:
     # - TIME_FROM_INTERNAL_OSC
@@ -35,7 +35,7 @@ ouster/os_driver:
     # - RNG15_RFL8_NIR8
     # - RNG19_RFL8_SIG16_NIR16_DUAL
     # - FUSA_RNG15_RFL8_NIR8_DUAL
-    udp_profile_lidar: ''
+    udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
     # metadata[optional]: path to save metadata file to, if left empty a file
     # with the sensor hostname or ip will be crearted in ~/.ros folder.
     metadata: ''
@@ -88,9 +88,9 @@ ouster/os_driver:
     # - ouster_ros/common_point_types.h.
     point_type: original
     # azimuth window start[optional]: values range [0, 360000] millidegrees
-    azimuth_window_start: 0
+    azimuth_window_start: 75000
     # azimuth_window_end[optional]: values range [0, 360000] millidegrees
-    azimuth_window_end: 360000
+    azimuth_window_end: 285000
     # persist_config[optional]: request the sensor to persist settings
     persist_config: false
     # organized[optional]: whether to generate an organized point cloud. default
