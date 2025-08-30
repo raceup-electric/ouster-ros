@@ -637,12 +637,30 @@ void OusterSensor::configure_sensor(const std::string& hostname,
     }
 
     uint8_t config_flags = compose_config_flags(config);
-    if (!set_config(hostname, config, config_flags)) {
-        throw std::runtime_error("Error connecting to sensor " + hostname);
-    }
 
-    RCLCPP_INFO_STREAM(get_logger(),
-                       "Sensor " << hostname << " configured successfully");
+
+    int retries = 0;
+    const int MAX_RETRIES = -1; // -1 means no limit
+
+    while(true) {
+        try {
+            RCLCPP_INFO_STREAM(get_logger(), "Trying to configure the sensor. Retries: " << std::to_string(retries));
+            
+            if (!set_config(hostname, config, config_flags)) {
+                throw std::runtime_error("Error connecting to sensor " + hostname);
+            }
+
+            RCLCPP_INFO_STREAM(get_logger(),
+                "Sensor " << hostname << " configured successfully");
+            break;
+
+        } catch (const std::exception& ex) {
+            if (retries == MAX_RETRIES) {
+                throw;
+            }
+            retries++;
+        }
+    }
 }
 
 // fill in values that could not be parsed from metadata
