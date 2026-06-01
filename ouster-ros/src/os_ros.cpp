@@ -14,7 +14,7 @@
 
 #include <tf2/LinearMath/Transform.h>
 
-#include <tf2_eigen/tf2_eigen.h>
+#include <tf2_eigen/tf2_eigen.hpp>
 
 #include <chrono>
 #include <string>

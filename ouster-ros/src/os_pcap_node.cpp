@@ -129,8 +129,8 @@ class OusterPcap : public OusterSensorNodeBase {
     }
 
     void declare_parameters() {
-        declare_parameter("metadata");
-        declare_parameter("pcap_file");
+        declare_parameter("metadata", "");
+        declare_parameter("pcap_file", "");
         declare_parameter("use_system_default_qos", false);
     }
 
