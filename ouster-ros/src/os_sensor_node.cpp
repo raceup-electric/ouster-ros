@@ -642,7 +642,7 @@ void OusterSensor::configure_sensor(const std::string& hostname,
     int retries = 0;
     const int MAX_RETRIES = -1; // -1 means no limit
 
-    while(true) {
+    while(rclcpp::ok()) {
         try {
             RCLCPP_INFO_STREAM(get_logger(), "Trying to configure the sensor. Retries: " << std::to_string(retries));
             
@@ -660,6 +660,7 @@ void OusterSensor::configure_sensor(const std::string& hostname,
             }
             retries++;
         }
+        rclcpp::sleep_for(std::chrono::milliseconds(1000));
     }
 }
 
