@@ -2,7 +2,7 @@ ouster/os_driver:
   ros__parameters:
     # sensor_hostname[required]: hostname or IP address of the sensor (IP4 or
     # IP6).
-    sensor_hostname: ''
+    sensor_hostname: '169.254.7.155' # 'os-122410001022.local'
     # udp_dest[optional]: hostname or multicast group IP where the sensor will
     # send UDP data packets.
     udp_dest: ''
@@ -16,7 +16,7 @@ ouster/os_driver:
     # lidar_mode[optional]: resolution and rate; possible values: { 512x10,
     # 512x20, 1024x10, 1024x20, 2048x10, 4096x5 }. Leave empty to remain on
     # current the lidar mode.
-    lidar_mode: ''
+    lidar_mode: '1024x20'
     # timestamp_mode[optional]: method used to timestamp measurements; possible
     # values:
     # - TIME_FROM_INTERNAL_OSC
@@ -25,7 +25,7 @@ ouster/os_driver:
     # - TIME_FROM_ROS_TIME: This option uses the time of reception of first
     #                       packet of a LidarScan as the timestamp of the IMU,
     #                       PointCloud2 and LaserScan messages.
-    timestamp_mode: ''
+    timestamp_mode: 'TIME_FROM_ROS_TIME'
     # multipurpose_io_mode[optional]: multipurpose IO / time sync mode;
     # possible values:
     # - OFF
@@ -50,7 +50,7 @@ ouster/os_driver:
     # - RNG19_RFL8_SIG16_NIR16_ZONE16 (requires FW3.2+)
     # - RNG19_RFL8_SIG16_NIR16_RGB16 (requires FW4.0+)
     # - RNG19_RFL8_SIG16_NIR16_RGB16_DUAL (requires FW4.0+)
-    udp_profile_lidar: ''
+    udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
     # columns_per_packet[optional]: number of columns per packet; possible values: {1, 2, 4, 8, 16, 32, 64};
     # default is 0 (unset); requires FW4.0+.
     columns_per_packet: 0
@@ -87,14 +87,14 @@ ouster/os_driver:
     # point_cloud_frame[optional]: which frame of reference to use when
     # generating PointCloud2 or LaserScan messages, select between the values of
     # lidar_frame and sensor_frame.
-    point_cloud_frame: os_lidar
+    point_cloud_frame: os_sensor
     # pub_static_tf[optional]: when this flag is set to True, the driver will
     # broadcast the TF transforms for the imu/sensor/lidar frames. Prevent the
     # driver from broadcasting TF transforms by setting this parameter to False.
     pub_static_tf: true
     # proc_mask[optional]: use any combination of the 6 flags IMG, PCL, IMU, SCAN
     # RAW and TLM to enable or disable their respective messages.
-    proc_mask: IMU|PCL|SCAN|IMG|RAW|TLM
+    proc_mask: IMU|PCL|TLM
     # scan_ring[optional]: use this parameter in conjunction with the SCAN flag
     # to select which beam of the LidarScan to use when producing the LaserScan
     # message. Choose a value the range [0, sensor_beams_count).
@@ -102,7 +102,7 @@ ouster/os_driver:
     # use_system_default_qos[optional]: if false, data are published with sensor
     # data QoS. This is preferrable for production but default QoS is needed for
     # rosbag. See: https://github.com/ros2/rosbag2/issues/125
-    use_system_default_qos: false
+    use_system_default_qos: true
     # point_type[optional]: choose from: {original, native, xyz, xyzi, o_xyzi,
     #                                     xyzir, xyzrgb, xyzrgba, color_point}
     # Here is a breif description of each option:
