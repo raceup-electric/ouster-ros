@@ -161,7 +161,7 @@ ouster/os_driver:
     persist_config: false
     # attempt_reconnect[optional]: attempting to reconnect to the sensor after
     # connection loss or sensor powered down
-    attempt_reconnect: false
+    attempt_reconnect: true
     # dormant_period_between_reconnects[optional]: wait time in seconds between
     # reconnection attempts
     dormant_period_between_reconnects: 1.0
